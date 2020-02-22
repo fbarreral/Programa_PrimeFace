@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="AlumnoCreateDlg" widgetVar="AlumnoCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateAlumnoTitle}">
+            <h:form id="AlumnoCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{alumnoController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateAlumnoLabel_numeroCarne}" for="numeroCarne" />
+                        <p:inputText id="numeroCarne" value="#{alumnoController.selected.numeroCarne}" title="#{bundle.CreateAlumnoTitle_numeroCarne}" required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_numeroCarne}"/>
+                        <p:outputLabel value="#{bundle.CreateAlumnoLabel_nombre}" for="nombre" />
+                        <p:inputText id="nombre" value="#{alumnoController.selected.nombre}" title="#{bundle.CreateAlumnoTitle_nombre}" required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_nombre}"/>
+                        <p:outputLabel value="#{bundle.CreateAlumnoLabel_apellido}" for="apellido" />
+                        <p:inputText id="apellido" value="#{alumnoController.selected.apellido}" title="#{bundle.CreateAlumnoTitle_apellido}" required="true" requiredMessage="#{bundle.CreateAlumnoRequiredMessage_apellido}"/>
+                        <p:outputLabel value="#{bundle.CreateAlumnoLabel_correo}" for="correo" />
+                        <p:inputText id="correo" value="#{alumnoController.selected.correo}" title="#{bundle.CreateAlumnoTitle_correo}" />
+                        <p:outputLabel value="#{bundle.CreateAlumnoLabel_telefonon}" for="telefonon" />
+                        <p:inputText id="telefonon" value="#{alumnoController.selected.telefonon}" title="#{bundle.CreateAlumnoTitle_telefonon}" />
+                        <p:outputLabel value="#{bundle.CreateAlumnoLabel_direccion}" for="direccion" />
+                        <p:inputText id="direccion" value="#{alumnoController.selected.direccion}" title="#{bundle.CreateAlumnoTitle_direccion}" />
+                        <p:outputLabel value="#{bundle.CreateAlumnoLabel_generoIdgenero}" for="generoIdgenero" />
+                        <p:selectOneMenu id="generoIdgenero" value="#{alumnoController.selected.generoIdgenero}" required="true" requiredMessage="#{bundle.EditAlumnoRequiredMessage_generoIdgenero}">
+                            <f:selectItems value="#{generoController.itemsAvailableSelectOne}"
+                                           var="generoIdgeneroItem"
+                                           itemValue="#{generoIdgeneroItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{alumnoController.create}" value="#{bundle.Save}" update="display,:AlumnoListForm:datalist,:growl" oncomplete="handleSubmit(args,'AlumnoCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="AlumnoCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
